@@ -34,6 +34,7 @@ pub fn main() !void {
     // get the log file writer
     var log_buffer: [4096]u8 = undefined;
     var log = std.fs.File.stderr().writer(&log_buffer);
+    defer log.end() catch {};
 
     try zig_raytrace.rayTrace(f32, .{
         .file = &writer.interface,
